@@ -3,29 +3,29 @@
 
 int main(){
     std::cout << "Input values : " << std::endl;
-    std::vector<int> valeurs {};
-    int ajout {0};
-    int somme {0};
-    int moyenne {0};
+    std::vector<int> values {};
+    int input {0};
+    int sum {0};
+    int average {0};
     while(true){
-        while(!(std::cin >> ajout)){
+        while(!(std::cin >> input)){
             std::cout << " You have to give a valid integer !" << std::endl;
             std::cin.clear();
             std::cin.ignore(255, '\n');
         }
-        if(ajout<0){
+        if(input<0){
             break;
         }
-        valeurs.push_back(ajout);
+        values.push_back(input);
     }
-    if(!std::empty(valeurs)){
-        for(auto const x : valeurs){
-        somme+= x;
+    if(!std::empty(values)){
+        for(auto const x : values){
+            sum+= x;
         }
-        std::cout << " The sum worth : " << somme << std::endl;
-        moyenne = somme/(std::size(valeurs));
+        std::cout << " The sum worth : " << sum << std::endl;
+        average = sum/(std::size(values));
 
-        std::cout << " The average of the array elements is  : " << moyenne << std::endl;
+        std::cout << " The average of the array elements is  : " << average << std::endl;
     }else{
         std::cout << "The array is empty , I can't calculate the average." << std::endl;
     }
