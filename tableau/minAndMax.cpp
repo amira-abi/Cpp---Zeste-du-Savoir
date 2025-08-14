@@ -23,4 +23,5 @@ int main(){
     std::cout << "Le plus petit élément du tableau est : "<< min << std::endl;
     std::cout << "Le plus grand élément du tableau est : "<< max << std::endl;
 
+    return 0;
 }
