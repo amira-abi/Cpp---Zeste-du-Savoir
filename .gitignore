@@ -9,7 +9,12 @@
 *.slo
 *.lo
 *.o
+*.out
+*.exe
+*.bin
+*.log
 *.obj
+/bin/
 
 # Precompiled Headers
 *.gch
