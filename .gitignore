@@ -17,8 +17,7 @@
 
 # compiled folders
 /classes/
-/build/
-/bin/
+
 
 # Precompiled Headers
 *.gch
