@@ -1,5 +1,11 @@
 #include <iostream>
 
+/**
+ * Prints a rectangle made of '*' characters with the given height and width.
+ *
+ * @param height The number of rows in the rectangle.
+ * @param width The number of columns in the rectangle.
+ */
 void rectangle(int height, int width){
     int a = 0;
     int b = 0;
