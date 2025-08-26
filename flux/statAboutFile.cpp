@@ -51,9 +51,7 @@ int main(){
         nbWord = 0;
         nbChar = 0 ;
     }
-
     fileStat.close();
 
-    
     return 0;
 }
