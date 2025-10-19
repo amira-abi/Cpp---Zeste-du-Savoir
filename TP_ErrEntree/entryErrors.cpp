@@ -32,9 +32,15 @@ bool inputHaveGoodSize(double & input){
 int askUser(std::string question, int & input){
     std::cout << question << std::endl;
     while(!(std::cin >> input || !inputHaveGoodSize(input))){
-        inputIsNotCorrect();
+        if (std::cin.eof())
+        {
+            throw std::runtime_error("Input stream has been closed!")
+        }else if (inputIsNotCorrect())
+        {
+            std::cout<< "You're suppose to give an int !"<< std::endl;
+        }
         std::cout<< "You're suppose to give an int !"<< std::endl;
-    };
+    }
 
     return input;
 }
@@ -50,10 +56,16 @@ int askUser(std::string question, int & input){
  */
 double askUser(std::string question, double & input){
     std::cout << question << std::endl;
-    while(!(std::cin >> input) || !inputHaveGoodSize(input)){
-        inputIsNotCorrect();
+    while(!(std::cin >> input || !inputHaveGoodSize(input))){
+        if (std::cin.eof())
+        {
+            throw std::runtime_error("Input stream has been closed!")
+        }else if (inputIsNotCorrect())
+        {
+            std::cout<< "You're suppose to give an int !"<< std::endl;
+        }
         std::cout<< "You're suppose to give an int !"<< std::endl;
-    };
+    }
 
     return input;
 }
