@@ -12,13 +12,6 @@ void clearInput(){
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
 }
 
-bool inputHaveGoodSize(int & input){
-    return ( input >std::numeric_limits<int>::min() && input <std::numeric_limits<int>::max());
-}
-
-bool inputHaveGoodSize(double & input){
-    return (input > std::numeric_limits<double>::min() && input<std::numeric_limits<double>::max());
-}
 
 /**
  * Check if hte user's input is within the range defined by
@@ -29,13 +22,12 @@ bool inputHaveGoodSize(double & input){
  * @param limitA the lower bound 
  * @param limitB the upper bound 
  * @return true if it's correct, false otherwise
- 
-int checkInput(std::optional<int> limitA, std::optional<int> limitB, std::string question, int & input){
-    input = askUser(question, input);
-    while ((limitA && input < limitA.value()) || (limitB && input > limitB.value())){
+ */
+template <typename T>
+T checkInput(std::optional<T> limitA, std::optional<T> limitB, T& input){
+    while (!(std::cin >> input) || (limitA && input < limitA.value()) || (limitB && input > limitB.value())){
         std::cout << "Value out of bounds" << std::endl;
         clearInput();
-        input = askUser(question, input);
     }
 
     return input;
@@ -67,7 +59,7 @@ int main(){
     int year {0};
     double size {0.0};
 
-    auto checkInput = [](auto & input, auto predicate) -> bool {
+    /**auto checkInput = [](auto & input, auto predicate) -> bool {
         while(!(std::cin >> input || !predicat(input))){
             if (std::cin.eof())
             {
@@ -79,24 +71,24 @@ int main(){
             }
     }
         return input;
-    }
+    }*/
 
     std::cout<<"On what month were you born ? "<< std::endl;
-    month = checkInput(1, 12, month) ;
+    month = checkInput<int>(std::optional<int>{1}, std::optional<int>{12}, month) ;
     
     if(month==2){
         std::cout<<"On what day were you born ? " << std::endl;
-        day = checkInput(1, 28, day);
+        day = checkInput<int>(std::optional<int>{1}, std::optional<int>{28}, day);
     }else{
         std::cout<< "On what day were you born ? " << std::endl;
-        day = checkInput(1, 31, day);
+        day = checkInput<int>(std::optional<int>{1}, std::optional<int>{31}, day);
     }
 
     std::cout << "On what year were you born" << std::endl;
-    year = checkInput(std::nullopt, 2025 , year);
+    year = checkInput<int>(std::optional<int>{}, std::optional<int>{2025} , year);
 
     std::cout << "What is you're size ? (in cm)" << std::endl;
-    size = checkInput(0.0, size);
+    size = checkInput<double>(std::optional<double>{0.0}, std::optional<double>{}, size);
 
     std::cout << "You we're born on " << day << "/" << month << "/" << year << std::endl;
     std::cout<< "You're size is " << size << " m"<< std::endl;
