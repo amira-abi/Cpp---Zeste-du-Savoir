@@ -21,57 +21,6 @@ bool inputHaveGoodSize(double & input){
 }
 
 /**
- * prompts the user with a question and retrives the input.
- * 
- * Display the given question to the standar output and waits for the users 
- * to enter a response.
- * 
- * @param question the message display to the user
- * @return An int containing the user's input
- */
-int askUser(std::string question, int & input){
-    std::cout << question << std::endl;
-    while(!(std::cin >> input || !inputHaveGoodSize(input))){
-        if (std::cin.eof())
-        {
-            throw std::runtime_error("Input stream has been closed!")
-        }else{
-            clearInput();
-            std::cout<< "You're suppose to give an int !"<< std::endl;
-        }
-    }
-
-    return input;
-}
-
-/**
- * prompts the user with a question and retrives the input.
- * 
- * Display the given question to the standar output and waits for the users 
- * to enter a response.
- * 
- * @param question the message display to the user
- * @return A double containing the user's input
- */
-double askUser(std::string question, double & input){
-    std::cout << question << std::endl;
-    while(!(std::cin >> input) || !inputHaveGoodSize(input)){
-        if (std::cin.eof())
-        {
-            throw std::runtime_error("Input stream has been closed!")
-        }else
-        {
-            clearInput();
-            std::cout<< "You're suppose to give an int !"<< std::endl;
-        }
-        std::cout<< "You're suppose to give an int !"<< std::endl;
-    }
-
-    return input;
-}
-
-
-/**
  * Check if hte user's input is within the range defined by
  * 'limitA' and 'limitB'. If the input is out of bounds, it
  * clears the input stream and notifies the user
