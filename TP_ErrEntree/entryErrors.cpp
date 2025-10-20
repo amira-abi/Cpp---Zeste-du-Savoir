@@ -80,7 +80,7 @@ double askUser(std::string question, double & input){
  * @param limitA the lower bound 
  * @param limitB the upper bound 
  * @return true if it's correct, false otherwise
- */
+ 
 int checkInput(std::optional<int> limitA, std::optional<int> limitB, std::string question, int & input){
     input = askUser(question, input);
     while ((limitA && input < limitA.value()) || (limitB && input > limitB.value())){
@@ -100,7 +100,7 @@ int checkInput(std::optional<int> limitA, std::optional<int> limitB, std::string
  * @param input the user's input to validate
  * @param limitA the lower bound 
  * @return true if it's correct, false otherwise
- */
+ 
 double checkInput(double limitA, std::string question, double & input){
     input = askUser(question, input);
     while (input < limitA){
@@ -110,7 +110,7 @@ double checkInput(double limitA, std::string question, double & input){
     }
 
     return input;
-}
+}*/
 
 int main(){
     int day {0};
