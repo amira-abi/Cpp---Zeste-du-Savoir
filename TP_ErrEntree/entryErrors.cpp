@@ -26,52 +26,27 @@ void clearInput(){
 template <typename T>
 T checkInput(std::optional<T> limitA, std::optional<T> limitB, T& input){
     while (!(std::cin >> input) || (limitA && input < limitA.value()) || (limitB && input > limitB.value())){
-        std::cout << "Value out of bounds" << std::endl;
-        clearInput();
+         if (std::cin.eof())
+        {
+            throw std::runtime_error("Le flux a été fermé !");
+        }
+        else if (std::cin.fail())
+        {
+            clearInput();
+        }else{
+            std::cout << "The condition was not respected !" << std::endl;
+        }
     }
 
     return input;
 }
 
-/**
- * Check if hte user's input is within the range defined by
- * 'limitA' and 'limitB'. If the input is out of bounds, it
- * clears the input stream and notifies the user
- * 
- * @param input the user's input to validate
- * @param limitA the lower bound 
- * @return true if it's correct, false otherwise
- 
-double checkInput(double limitA, std::string question, double & input){
-    input = askUser(question, input);
-    while (input < limitA){
-        std::cout << "Value out of bounds" << std::endl;
-        clearInput();
-        input = askUser(question, input);
-    }
-
-    return input;
-}*/
 
 int main(){
     int day {0};
     int month  {0};
     int year {0};
     double size {0.0};
-
-    /**auto checkInput = [](auto & input, auto predicate) -> bool {
-        while(!(std::cin >> input || !predicat(input))){
-            if (std::cin.eof())
-            {
-                throw std::runtime_error("Input stream has been closed!")
-            }else if (std::cin.fail()){
-                clearInput();
-            }else{
-                std::cout<< "The predicate was not respected !"<< std::endl;
-            }
-    }
-        return input;
-    }*/
 
     std::cout<<"On what month were you born ? "<< std::endl;
     month = checkInput<int>(std::optional<int>{1}, std::optional<int>{12}, month) ;
