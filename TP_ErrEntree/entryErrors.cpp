@@ -6,7 +6,7 @@
  * Displays an error message indicating that the input is invalid
  * then clears and ingnore the input stream to prepare for new input
  */
-void inputIsNotCorrect(){
+void clearInput(){
     std::cout << "You're input is not correct, try again !" << std::endl;
     std::cin.clear();
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
@@ -35,11 +35,10 @@ int askUser(std::string question, int & input){
         if (std::cin.eof())
         {
             throw std::runtime_error("Input stream has been closed!")
-        }else if (inputIsNotCorrect())
-        {
+        }else{
+            clearInput();
             std::cout<< "You're suppose to give an int !"<< std::endl;
         }
-        std::cout<< "You're suppose to give an int !"<< std::endl;
     }
 
     return input;
@@ -56,12 +55,13 @@ int askUser(std::string question, int & input){
  */
 double askUser(std::string question, double & input){
     std::cout << question << std::endl;
-    while(!(std::cin >> input || !inputHaveGoodSize(input))){
+    while(!(std::cin >> input) || !inputHaveGoodSize(input)){
         if (std::cin.eof())
         {
             throw std::runtime_error("Input stream has been closed!")
-        }else if (inputIsNotCorrect())
+        }else
         {
+            clearInput();
             std::cout<< "You're suppose to give an int !"<< std::endl;
         }
         std::cout<< "You're suppose to give an int !"<< std::endl;
@@ -85,7 +85,7 @@ int checkInput(std::optional<int> limitA, std::optional<int> limitB, std::string
     input = askUser(question, input);
     while ((limitA && input < limitA.value()) || (limitB && input > limitB.value())){
         std::cout << "Value out of bounds" << std::endl;
-        inputIsNotCorrect();
+        clearInput();
         input = askUser(question, input);
     }
 
@@ -105,7 +105,7 @@ double checkInput(double limitA, std::string question, double & input){
     input = askUser(question, input);
     while (input < limitA){
         std::cout << "Value out of bounds" << std::endl;
-        inputIsNotCorrect();
+        clearInput();
         input = askUser(question, input);
     }
 
@@ -117,16 +117,38 @@ int main(){
     int month  {0};
     int year {0};
     double size {0.0};
+
+    auto askUser = [](const std::string & question){
+        auto input;
+        std::cout << question;
+        while(!(std::cin >> input || !inputHaveGoodSize(input))){
+        if (std::cin.eof())
+        {
+            throw std::runtime_error("Input stream has been closed!")
+        }else{
+            clearInput();
+            std::cout<< "You're suppose to give an int or a double(size) !"<< std::endl;
+        }
+        std::cout<< "You're suppose to give an int !"<< std::endl;
+    }
+        return input;
+    }
+
+    askUser("On what month were you born ? ");
     month = checkInput(1, 12, "On what month were you born ? ", month) ;
     
     if(month==2){
+        askUser("On what day were you born ? ");
         day = checkInput(1, 28, "On what day were you born ?", day);
     }else{
+        askUser("On what day were you born ? ");
         day = checkInput(1, 31, "On what day were you born ?", day);
     }
 
+    askUser("On what year were you born");
     year = checkInput(std::nullopt, 2025 , "On what year were you born", year);
 
+    askUser("What is you're size ? (in cm)");
     size = checkInput(0.0,"What is you're size ? (in cm)", size);
 
     std::cout << "You we're born on " << day << "/" << month << "/" << year << std::endl;
