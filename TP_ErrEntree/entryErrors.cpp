@@ -135,21 +135,21 @@ int main(){
     }
 
     askUser("On what month were you born ? ");
-    month = checkInput(1, 12, "On what month were you born ? ", month) ;
+    month = checkInput(1, 12, month) ;
     
     if(month==2){
         askUser("On what day were you born ? ");
-        day = checkInput(1, 28, "On what day were you born ?", day);
+        day = checkInput(1, 28, day);
     }else{
         askUser("On what day were you born ? ");
-        day = checkInput(1, 31, "On what day were you born ?", day);
+        day = checkInput(1, 31, day);
     }
 
     askUser("On what year were you born");
-    year = checkInput(std::nullopt, 2025 , "On what year were you born", year);
+    year = checkInput(std::nullopt, 2025 , year);
 
     askUser("What is you're size ? (in cm)");
-    size = checkInput(0.0,"What is you're size ? (in cm)", size);
+    size = checkInput(0.0, size);
 
     std::cout << "You we're born on " << day << "/" << month << "/" << year << std::endl;
     std::cout<< "You're size is " << size << " m"<< std::endl;
