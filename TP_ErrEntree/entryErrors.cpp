@@ -43,7 +43,7 @@ int main(){
         day = askValue("On what day were you born ? ", day, [](int day) -> bool {return (day<1 || day > 31);});
     }
 
-    year = askValue("On what year were you born", year, [](int year) -> bool {return (year < 2025);} );
+    year = askValue("On what year were you born", year, [](int year) -> bool {return (year >2S025);} );
 
     size = askValue("What is you're size ? (in cm)", size,[](int size) -> bool {return (size < 0.0);});
 
